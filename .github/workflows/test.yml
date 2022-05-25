@@ -9,9 +9,19 @@ jobs:
         with:
           node-version: 16
       - name: install node modules
-        run: yarn install
+        run: yarn
       - name: Building React App
         run: yarn build
-      - name: Build Finish
-        run: echo "Hurray!"
+      - name: Building React App
+        run: yarn build
+      - name: Sets vercel Env
+        run: |
+          cd build
+          mkdir .vercel
+          cd .vercel
+          touch project.json
+          echo '{"orgId":"kEFplssM2cSZbDubOz3PTlyn","projectId":"prj_eDNaVHXKXwwaLYSfVNWuHHZhKzSf"}' > project.json
+      - name: Deploying the project
+        run: yarn deploy
+
       
