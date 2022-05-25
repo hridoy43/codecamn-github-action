@@ -1,7 +1,7 @@
 name: test github action
 on: [push]
 jobs:
-  build-projects:
+  build-and-deploy-app:
     runs-on: ubuntu-latest
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -25,3 +25,8 @@ jobs:
           echo '{\"$VERCEL_ORG_ID\":"kEFplssM2cSZbDubOz3PTlyn",\"$VERCEL_PROJECT_ID\":"prj_eDNaVHXKXwwaLYSfVNWuHHZhKzSf"}' > project.json
       - name: Deploying the project
         run: yarn deploy
+  test-app:
+    needs: build-and-deploy-app #will wait until the build-and-deploy-app done
+    runs_on: ubuntu latest
+    steps:
+      - run: echo "Hello!"
