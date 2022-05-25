@@ -8,4 +8,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: node -v
+      - name: Building React App
+        run: yarn build
+      - name: Build Finish
+        run: echo "Hurray!"
+      
