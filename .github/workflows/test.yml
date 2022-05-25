@@ -3,6 +3,10 @@ on: [push]
 jobs:
   build-projects:
     runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+      VERCEL_PROJECT_ID: ${{secrets.VERCEL_PROJECT_ID}}
+      VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -12,16 +16,12 @@ jobs:
         run: yarn
       - name: Building React App
         run: yarn build
-      - name: Building React App
-        run: yarn build
       - name: Sets vercel Env
         run: |
           cd build
           mkdir .vercel
           cd .vercel
           touch project.json
-          echo '{"orgId":"kEFplssM2cSZbDubOz3PTlyn","projectId":"prj_eDNaVHXKXwwaLYSfVNWuHHZhKzSf"}' > project.json
+          echo '{\"$VERCEL_ORG_ID\":"kEFplssM2cSZbDubOz3PTlyn",\"$VERCEL_PROJECT_ID\":"prj_eDNaVHXKXwwaLYSfVNWuHHZhKzSf"}' > project.json
       - name: Deploying the project
         run: yarn deploy
-
-      

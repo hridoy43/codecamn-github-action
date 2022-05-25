@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "vc build --prod --confirm --token=BeyVOZModgA67MItycmjNgj5",
+    "deploy": "vc build --prod --confirm --token=$VERCEL_TOKEN",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
